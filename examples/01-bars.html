@@ -1,0 +1,28 @@
+
+<script src="/lib/jquery-1.10.2.min.js"></script>
+<script src="/lib/d3.v3.min.js"></script>
+<script src="/lib/dimple.v1.min.js"></script>
+<script src="/dist/chartFactory.v0.1.js"></script>
+
+
+<div id="chart1"></div>
+
+<script type="text/javascript">
+
+    var datafile = "/data/example_data.tsv";
+
+    var dashDefinition = {
+        charts: [
+            {id:'chart1',
+             width:800,height:250,
+             xAxis:{type:'Category',field: "Month",orderRule:'Date'},
+             yAxis:{type:'Measure',field:'Unit Sales'},
+             series:[{fields:null,'graphType': dimple.plot.bar}]
+            }
+        ]
+    }
+
+ 	d3.tsv(datafile, function (data) {
+        chartFactory.createDash(data,dashDefinition);
+    });
+</script>

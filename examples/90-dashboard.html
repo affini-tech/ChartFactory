@@ -1,0 +1,78 @@
+<style type="text/css">
+  #chart2 {
+    position: absolute;
+    left: 0px;
+    width: 500px;
+  }
+  #filterPanel {
+    position: absolute;
+    left: 600px;
+    width: 300px;
+  }
+
+</style>
+
+<script src="/lib/jquery-1.10.2.min.js"></script>
+<script src="/lib/d3.v3.min.js"></script>
+<script src="/lib/dimple.v1.min.js"></script>
+<script src="/dist/chartFactory.v0.1.js"></script>
+
+
+<div id="chart1"></div>
+<div id="chart2"></div>
+
+<div id="filterPanel">
+  <div id="ownerFilterPanel1"></div>
+  <div id="ownerFilterPanel2"></div>
+</div>
+
+<script type="text/javascript">
+
+ 	var datafile = "/data/example_data.tsv";
+
+  var dashDefinition = {
+    charts: [
+        {id:'chart1',
+         width:900, height:500, 
+         xAxis:{ type:'Measure', field: "Unit Sales"},
+         yAxis:{ type:'Measure', field:'Operating Profit'},
+         zAxis:{ field:"Sales Value"},
+         colorAxis:{ field:"Sales Value",colors:["#FF0000", "#FF9A00", "#00FF00"]},
+         series:[{fields:["SKU", "Channel","Owner"],
+            graphType: dimple.plot.bubble, 
+            onClick:onBarClick}]
+        },
+        {id:'chart2',
+         width:600,height:250,
+         xAxis:{type:'Category',field: "Month",orderRule:'Date'},
+         yAxis:{type:'Measure',field:'Unit Sales'},
+         colorAxis:{field:"Sales Value",colors:["#FF0000", "#FF9A00", "#00FF00"]},
+         series:[{fields:null,'graphType': dimple.plot.bar}]
+        }],
+    filters: [
+        {id:'ownerFilterPanel1',
+         field:'Owner',
+         title:'Owners : ',
+         charts:[0,1] 
+        },
+        {id:'ownerFilterPanel2',
+         field:'Brand',
+         title:'Brands : ',
+         charts:[0,1] 
+        }]
+  }
+
+ 	d3.tsv(datafile, function (data) {
+    chartFactory.createDash(data,dashDefinition);
+  });
+
+ 	
+ 	function onBarClick(e){
+ 		//console.log(e.seriesValue);
+    //html = "";
+    //e.seriesValue.forEach(function(v){html=html+'<p>'+ v +'</p>'});
+    //console.log(html);
+    //$('#statusBar').html(html);
+ 	}
+
+</script>
