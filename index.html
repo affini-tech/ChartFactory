@@ -1,6 +1,35 @@
 <html>
+ <head>
+  <script type="text/javascript">
+  var _wt1Q = _wt1Q || [];
+
+  /* Example of tracking before the _wt1Q tracker is ready */
+  _wt1Q.push(["setVisitorParam", "vparam_start", "vparam_start"]);
+  _wt1Q.push(["trackPage", { "page": "important", "basket": "empty"}]);
+
+  (function() {
+    var script = document.createElement('script');
+    script.src = "http://146.148.8.185:8080/js/track.js";
+    script.type = 'text/javascript';
+    script.async = "true";
+    var script0 = document.getElementsByTagName("script")[0];
+    script0.parentNode.insertBefore(script, script0);
+    
+    var script1 = document.createElement('script');
+    script1.src = "public/globalId?fun=showGlobalId";
+    script1.type = 'text/javascript';
+    script1.async = "true";
+    script0.parentNode.insertBefore(script1, script0);
+  })();
+  
+  function showGlobalId(id) {
+	  document.getElementById("globalId").textContent = "ID = "+ id;
+  }
+  </script>
+ </head>
  <body>
-  <a href="examples/01-bars.html">Simple bars</a>
-  <a href="examples/02-bars-colors.html">Colored bars</a>
+  <a href="examples/01-bars.html">Simple bars</a><br/>
+  <a href="examples/02-bars-colors.html">Colored bars</a><br/>
+  <a href="examples/90-dashboard.html">Dashboard</a><br/>
  </body>
 </html>
